@@ -13,7 +13,7 @@ fontScale = 0.35
 fontColor = (0, 0, 255)
 lineType = 1
 
-emotions = ["anger", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"]  # Emotion list
+emotions = ["happiness", "neutral", "sadness", "surprise"]  # Emotion list
 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(
@@ -143,9 +143,9 @@ if (saved_training_data.size == 0 | saved_training_labels.size == 0):
 
 
 else:
-    for i in range(0, 10):
-        npar_train = np.array(saved_training_data[i])
-        training_labels = saved_training_labels[i]
+    for i in range(0, 2):
+        npar_train = np.array(np.genfromtxt("training_data{}.csv".format(i), delimiter=","))
+        training_labels = np.genfromtxt("training_label{}.csv".format(i), delimiter=",")
         clf.fit(npar_train, training_labels)
 
 # Set up some required objects
